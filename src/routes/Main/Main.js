@@ -1,6 +1,11 @@
+import Input from "../../Components/Input/Input"
+
 const Main = () => {
  return (
-  <div>main</div>
+  <div>
+
+
+  </div>
  )
 }
 
