@@ -1,5 +1,5 @@
 import { useState } from "react"
-
+import Button from "../Button/Button"
 const Form = ({ onSubmit, initialValue, children }) => {
  const [value, setValue] = useState(initialValue)
 
@@ -18,7 +18,7 @@ const Form = ({ onSubmit, initialValue, children }) => {
  return (
   <form onSubmit={handeSubmit}>
    {children}
-   <button type="submit">test</button>
+
   </form>
  )
 
