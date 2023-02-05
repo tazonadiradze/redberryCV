@@ -1,0 +1,18 @@
+.input {
+ width: 371px;
+ height: 56px;
+
+}
+
+.input-variant-success {
+ border: 1px solid #98E37E;
+
+}
+
+.input-variant-error {
+ border: 1px solid #EF5050;
+}
+
+.input-variant-default {
+ border: 1px solid #BCBCBC;
+}

@@ -1,10 +1,12 @@
-const Button = (props) => {
+import './Button.css';
+
+const variant = 'default' | 'primary' | 'secondary'
+const Button = ({ title, onClick, className, variant = 'default' }) => {
  return (
-  <button type={props.type} onClick={props.onClick}>
-   {props.text}
-  </button>
- )
-}
+  <div onClick={onClick} className={`btn btn-variant-${variant} ${className}`}>
+   {title}
+  </div>
+ );
+};
 
-
-export default Button
+export default Button;
