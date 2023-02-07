@@ -9,7 +9,9 @@ import { useState } from "react"
 
 
 const mainformFields = {
- name: 'name'
+ employer: '',
+ position: '',
+
 }
 
 
@@ -17,24 +19,13 @@ const mainformFields = {
 
 const Main = () => {
 
- const [state, setState] = useState()
+ const [state, setState] = useState(mainformFields)
  const [value, setValue] = useState('')
- const [elements, setElements] = useState([])
 
 
- const handleClick = () => {
-  const newElement = (
-   <div key={elements.length + 1}>
 
-    <Input type="text" variant={variant} onChange={onChange} name='name' />
-    <Input type="text" variant={variant} onChange={onChange} name='name' />
-    <Date />
-    <Date />
-    <Input type="text" variant={variant} onChange={onChange} name='name' />
-   </div>
-  )
-  setElements([...elements, newElement])
- }
+ const { employer, position, startdate } = state
+
 
  const onChange = (event) => {
   setState({ ...state, [event.target.name]: event.target.value });
@@ -47,19 +38,20 @@ const Main = () => {
  return (
   <div>
    <Form>
-    <Input type="text" variant={variant} onChange={onChange} name='name' />
-    <Input type="text" variant={variant} onChange={onChange} name='name' />
+    <Input type="text" variant={variant} onChange={onChange} value={position} name='position' />
+    <Input type="text" variant={variant} onChange={onChange} value={employer} name='employer' />
+    <Date onChange={onChange} value={startdate} name='startdate' />
     <Date />
-    <Date />
     <Input type="text" variant={variant} onChange={onChange} name='name' />
-    {elements.map((element) => {
-     return element
-    })}
-    <Button onClick={handleClick} title='add experience' />
+    <Button title='add experience' />
 
    </Form>
   </div>
+
  )
+
+
+
 }
 
 

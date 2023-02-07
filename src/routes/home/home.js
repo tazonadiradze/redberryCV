@@ -1,4 +1,5 @@
 import Input from "../../Components/Input/Input"
+import './Home.css'
 import Form from "../../Components/Form/Form"
 import Button from "../../Components/Button/Button";
 import { useState } from "react";
@@ -24,8 +25,9 @@ const Home = () => {
 
  const [state, setState] = useState(formFields)
  const [value, setValue] = useState('');
-
  const variant = value.length > 2 ? 'success' : value.length === 0 ? 'default' : 'error';
+
+ const { name, surname } = state
 
 
 
@@ -44,15 +46,17 @@ const Home = () => {
 
  console.log(state)
 
+
+
  return (
-  <div>
+  <div className="wrapper-div">
    <Form initialValue={formFields} onSubmit={() => { }} >
 
-    <Input type="text" variant={variant} onChange={onChange} name='name' label='სახელი' />
-    <Input type="text" variant={variant} onChange={onChange} name='surname' label='გვარი' />
-    <Input type="text" variant={variant} onChange={onChange} name='surname' />
-    <Input type="email" variant={variant} onChange={onChange} name='surname' />
-    <Input type="tel" variant={variant} onChange={onChange} name='surname' />
+    <Input type="text" variant={variant} onChange={onChange} name='name' label='სახელი' value={name} />
+    <Input type="text" variant={variant} onChange={onChange} name='surname' label='გვარი' value={surname} />
+    <Input type="text" variant={variant} onChange={onChange} name='surname' label='ჩემ შესახებ (არასავალდებულო)' />
+    <Input type="email" variant={variant} onChange={onChange} name='surname' label='ელ.ფოსტა' />
+    <Input type="tel" variant={variant} onChange={onChange} name='surname' label='მობილურის ნომერი' />
 
 
    </Form>
