@@ -20,6 +20,7 @@ const Input = ({
     value={value}
     name={name}
     onChange={onChange}
+
     {...rest}
    />
   </div>

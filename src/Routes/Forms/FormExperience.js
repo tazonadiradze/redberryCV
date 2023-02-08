@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { json } from "react-router-dom";
 
 
-const SubmitPage = () => {
+const FormExperience = () => {
 
 
  const [data, setData] = useState(null);
@@ -59,4 +59,4 @@ const SubmitPage = () => {
 }
 
 
-export default SubmitPage
+export default FormExperience

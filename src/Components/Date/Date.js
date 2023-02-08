@@ -1,11 +1,19 @@
-const Date = ({ value, onChange }) => {
+const Date = ({ onChange, label, name, value }) => {
  return (
-  <input
-   type='date'
-   value={value}
-   onChange={onChange}
-  />
+  <div>
+   <label>{label}</label>
+   <input
+    type='date'
+    name={name}
+    value={value}
+
+    onChange={onChange}
+
+   />
+  </div>
+
  )
+
 }
 
 

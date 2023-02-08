@@ -1,16 +1,20 @@
 
-import { Routes, Route, } from 'react-router-dom';
-import Home from './Routes/Home/Home';
-import Main from './Routes/Main/Main';
-import SubmitPage from './Routes/SubmitPage/SubmitPage';
+import { Routes, Route, Form, } from 'react-router-dom';
+import FormPersonal from './Routes/Forms/FormPersonal';
+import FormEducation from './Routes/Forms/FormEducation';
+import FormExperience from './Routes/Forms/FormExperience';
+
 const App = () => {
   return (
+
+
     <Routes>
-      <Route path='/' element={<Home />} />
-      <Route path='/main' element={<Main />} />
-      <Route path='/submit' element={<SubmitPage />} />
+      <Route path='/' element={<FormPersonal />} />
+      <Route path='/main' element={<FormEducation />} />
+      <Route path='/submit' element={<FormExperience />} />
 
     </Routes>
+
 
   )
 
