@@ -1,58 +1,80 @@
 import Input from "../../Components/Input/Input"
-import Button from "../../Components/Button/Button"
+import Date from "../../Components/Date/Date"
 import Form from "../../Components/Form/Form"
-import { useEffect, useState } from "react";
-import { json } from "react-router-dom";
+import Button from "../../Components/Button/Button"
+import { useState } from "react"
+import FormEducation from "./FormEducation"
+
+
+
+
+const mainformFields = {
+ employer: '',
+ position: '',
+ start_date: '',
+ due_date: '',
+ description: ''
+
+}
+
+
 
 
 const FormExperience = () => {
 
+ const [state, setState] = useState([mainformFields])
+ const [page, setPage] = useState('')
+ const [value, setValue] = useState('')
 
- const [data, setData] = useState(null);
- const [error, setError] = useState(null)
- const [loading, setLoading] = useState(false)
 
 
- useEffect(() => {
-  const fetchData = async () => {
-   setLoading(true);
-   try {
-    const response = await fetch('https://resume.redberryinternship.ge/api/degrees');
-    const json = await response.json();
-    setData(json);
-   } catch (error) {
-    setError(error);
-   } finally {
-    setLoading(false);
+
+ if (page === 'education') {
+  return <FormEducation />
+ }
+
+
+ const onChange = (e, name, index) => {
+  const value = e.target.value;
+  const updatedState = state.map((item, i) => {
+
+   if (i === index) {
+
+    return { ...state[index], [name]: value };
    }
-  };
-  fetchData();
- }, []);
+   return item
+  })
 
- if (loading) {
-  return <div>Loading...</div>;
- }
+  setState(updatedState)
+ };
+ console.log(state)
 
- if (error) {
-  return <div>Error: {error.message}</div>;
- } else {
+ const variant = value.length > 2 ? 'success' : value.length === 0 ? 'default' : 'error';
 
- }
-
- if (data) {
-  console.log(data)
-  return (
+ return (
+  <div>
    <Form>
-    <Input />
-    <select>
-     {data.map(item => <option key={item.id}>{item.title}</option>)}
-    </select>
+    {state.map((eachObj, index) => {
+     console.log('each', eachObj)
+     return (
+      <div>
+       <Input type="text" variant={variant} onChange={(event) => onChange(event, 'position', index)} value={eachObj.position} />
+       <Input type="text" variant={variant} onChange={(event) => onChange(event, 'employer', index)} value={eachObj.employer} />
+       <Date onChange={(event) => onChange(event, 'start_date', index)} value={eachObj.start_date} />
+       <Date onChange={(event) => onChange(event, 'due_date', index)} value={eachObj.due_date} />
+       <Input onChange={(event) => onChange(event, 'description', index)} value={eachObj.description} />
+      </div>
+     )
+    })}
+
+
+    <Button onClick={() => setState([...state, mainformFields])} title='add experience' />
+    <Button title='next ' onClick={() => setPage('education')} />
+
    </Form>
-  )
+  </div>
 
-
- }
-
+ )
 
 
 

@@ -1,76 +1,57 @@
 import Input from "../../Components/Input/Input"
-import Date from "../../Components/Date/Date"
-import Form from "../../Components/Form/Form"
 import Button from "../../Components/Button/Button"
-import { useState } from "react"
-
-
-
-
-
-const mainformFields = {
- employer: '',
- position: '',
- start_date: '',
- due_date: '',
- description: ''
-
-}
-
-
+import Form from "../../Components/Form/Form"
+import { useEffect, useState } from "react";
 
 
 const FormEducation = () => {
 
- const [state, setState] = useState([mainformFields])
 
- const [value, setValue] = useState('')
-
-
-
+ const [data, setData] = useState(null);
+ const [error, setError] = useState(null)
+ const [loading, setLoading] = useState(false)
 
 
-
-
- const onChange = (e, name, index) => {
-  const value = e.target.value;
-  const updatedState = state.map((item, i) => {
-   console.log(item, 'item')
-   console.log(i, 'i')
-   if (i === index) {
-    return { ...state[index], [name]: value };
+ useEffect(() => {
+  const fetchData = async () => {
+   setLoading(true);
+   try {
+    const response = await fetch('https://resume.redberryinternship.ge/api/degrees');
+    const json = await response.json();
+    setData(json);
+   } catch (error) {
+    setError(error);
+   } finally {
+    setLoading(false);
    }
-   return item
-  })
+  };
+  fetchData();
+ }, []);
 
-  setState(updatedState)
- };
- console.log(state)
+ if (loading) {
+  return <div>Loading...</div>;
+ }
 
- const variant = value.length > 2 ? 'success' : value.length === 0 ? 'default' : 'error';
+ if (error) {
+  return <div>Error: {error.message}</div>;
+ } else {
 
- return (
-  <div>
+ }
+
+ if (data) {
+  console.log(data)
+  return (
    <Form>
-    {state.map((eachObj, index) => {
-     console.log('each', eachObj)
-     return (
-      <div>
-       <Input type="text" variant={variant} onChange={(event) => onChange(event, 'position', index)} value={eachObj.position} />
-       <Input type="text" variant={variant} onChange={(event) => onChange(event, 'employer', index)} value={eachObj.employer} />
-       <Date onChange={(event) => onChange(event, 'start_date', index)} value={eachObj.start_date} />
-       <Date onChange={(event) => onChange(event, 'due_date', index)} value={eachObj.due_date} />
-       <Input onChange={(event) => onChange(event, 'description', index)} value={eachObj.description} />
-      </div>
-     )
-    })}
-
-
-    <Button onClick={() => setState([...state, mainformFields])} title='add experience' />
+    <Input />
+    <select>
+     {data.map(item => <option key={item.id}>{item.title}</option>)}
+    </select>
    </Form>
-  </div>
+  )
 
- )
+
+ }
+
 
 
 

@@ -1,24 +1,24 @@
 
-import { Routes, Route, Form, } from 'react-router-dom';
-import FormPersonal from './Routes/Forms/FormPersonal';
-import FormEducation from './Routes/Forms/FormEducation';
-import FormExperience from './Routes/Forms/FormExperience';
+import { Routes, Route, } from 'react-router-dom';
+
+import Home from './Home/Home';
+import { Fragment, useState } from 'react';
 
 const App = () => {
+
   return (
+    <Fragment>
+      <div>
+        <Routes>
+          <Route path='/' element={<Home />} />
+        </Routes>
+      </div>
 
 
-    <Routes>
-      <Route path='/' element={<FormPersonal />} />
-      <Route path='/main' element={<FormEducation />} />
-      <Route path='/submit' element={<FormExperience />} />
-
-    </Routes>
-
-
+    </Fragment >
   )
 
-
 }
+
 
 export default App
