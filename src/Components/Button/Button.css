@@ -2,19 +2,29 @@
  padding: 10px 20px;
  width: 70px;
  height: 30px;
-
+ cursor: pointer;
 }
 
 .btn-variant-default {
- background-color: #62A1EB;
- color: white
+ background-color: #62a1eb;
+ color: white;
 }
 
 .btn-variant-primary {
- background-color: red;
-
+ background-color: #6B40E3;
+ color:white;
 }
 
 .btn-variant-secondary {
- background-color: yellow;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ width: 464px;
+ height: 60px;
+ background-color: black;
+ color: white;
+ border-radius: 8px;
+ font-weight: 500;
+ font-size: 20px;
+ line-height: 24px;
 }

@@ -1,24 +1,21 @@
+import { Routes, Route } from 'react-router-dom';
 
-import { Routes, Route, } from 'react-router-dom';
+import Home from './Routes/Home/Home';
+import ResumeBuilder from './Routes/ResumeBuilder/ResumeBuilder';
 
-import Home from './Home/Home';
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 
 const App = () => {
+ return (
+  <Fragment>
+   <div>
+    <Routes>
+     <Route path="/" element={<Home />} />
+     <Route path="/resume" element={<ResumeBuilder />} />
+    </Routes>
+   </div>
+  </Fragment>
+ );
+};
 
-  return (
-    <Fragment>
-      <div>
-        <Routes>
-          <Route path='/' element={<Home />} />
-        </Routes>
-      </div>
-
-
-    </Fragment >
-  )
-
-}
-
-
-export default App
+export default App;

@@ -1,6 +1,7 @@
 import './Button.css';
 
-const variant = 'default' | 'primary' | 'secondary'
+//  variant = 'default' | 'primary' | 'secondary'
+
 const Button = ({ title, onClick, className, variant = 'default' }) => {
  return (
   <div onClick={onClick} className={`btn btn-variant-${variant} ${className}`}>

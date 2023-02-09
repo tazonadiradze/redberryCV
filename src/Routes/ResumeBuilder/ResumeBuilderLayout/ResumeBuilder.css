@@ -1,0 +1,26 @@
+.resume-builder {
+ display: flex;
+ height: 100vh;
+}
+
+.resume-builder-header {
+ display: flex;
+ justify-content: space-between;
+ border-bottom: 2px solid black;
+ padding: 10px;
+}
+.resume-builder-content {
+ flex-grow: 1;
+ height: 80%;
+}
+
+.resume-builder-left {
+ flex: 1;
+ background-color: rgb(251, 247, 247);
+ padding: 0 30px;
+}
+
+.resume-builder-right {
+ background-color: white;
+ flex: 1;
+}
