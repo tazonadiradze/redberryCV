@@ -1,11 +1,12 @@
 import Input from '../../../../Components/Input/Input';
+
 import Date from '../../../../Components/Date/Date';
 import Form from '../../../../Components/Form/Form';
 import Button from '../../../../Components/Button/Button';
 import { useState } from 'react';
 import { useResumeBuilder } from '../../../../Providers/ResumeBuilderProvider';
-import { experiencesArrayValidationSchema } from '../../../../validation/validationSchemas';
-import { validateArray } from '../../../../validation/utils';
+import { experiencesArrayValidationSchema } from '../../../../Validation/validationSchemas';
+import { validateArray } from '../../../../Validation/utils';
 import FormButtons from './FormButtons/FormButtons';
 
 const mainformFields = {
@@ -67,7 +68,8 @@ const FormExperience = () => {
    <Form>
     {values.map((eachObj, index) => {
      return (
-      <div>
+      <div className='Wrapper-div'>
+
        <Input
         type="text"
         variant={getFieldVariant('position', index)}
@@ -80,6 +82,7 @@ const FormExperience = () => {
         onChange={(event) => onChange(event, 'employer', index)}
         value={eachObj.employer}
        />
+
        <Date
         variant={getFieldVariant('start_date', index)}
         onChange={(event) => onChange(event, 'start_date', index)}

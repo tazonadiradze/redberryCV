@@ -1,7 +1,25 @@
 .resume {
- padding: 10px 30px;
+ width: 822px;
+ height: 1080px;
+ background-color: #FFFFFF;
 }
+
+.resume-logo {
+ position: absolute;
+ left: 70%;
+ bottom: 5%;
+}
+
 .resume-section {
  border-bottom: 2px solid red;
  margin-bottom: 50px;
+}
+
+h1 {
+ font-family: 'Helvetica Neue', sans-serif;
+ font-style: normal;
+ font-weight: 700;
+ font-size: 34px;
+ line-height: 42px;
+ color: #F93B1D;
 }

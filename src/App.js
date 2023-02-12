@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import './fonts.css';
 
 import Home from './Routes/Home/Home';
 import ResumeBuilder from './Routes/ResumeBuilder/ResumeBuilder';

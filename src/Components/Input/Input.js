@@ -13,7 +13,7 @@ const Input = ({
 }) => {
  return (
   <div >
-   {Boolean(label) && <label>{label}</label>}
+   {Boolean(label) && <label className='label'>{label}</label>}
    <input className={`input input-variant-${variant} ${className}`}
 
     type={type}

@@ -17,6 +17,8 @@ export const experienceValidationSchema = yup.object().shape({
  description: yup.string().required(),
 });
 
+
+
 export const experiencesArrayValidationSchema = yup
  .array()
  .of(experienceValidationSchema);

@@ -12,3 +12,18 @@
  top: 470px;
  left: 1075px;
 }
+
+.redberry-logo {
+ position: absolute;
+ left: 70px;
+ top: 25px;
+}
+
+.hr-line {
+ position: absolute;
+ left: 70px;
+ top: 89px;
+ width: 1780px;
+ height: 0;
+ border: 1px solid #1A1A1A;
+}

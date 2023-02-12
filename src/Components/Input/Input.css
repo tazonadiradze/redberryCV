@@ -1,7 +1,10 @@
 .input {
  width: 371px;
  height: 56px;
-
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ margin: 0;
 }
 
 .input-variant-success {
@@ -15,4 +18,12 @@
 
 .input-variant-default {
  border: 1px solid #BCBCBC;
+}
+
+.label {
+ display: flex;
+ justify-content: flex-start;
+ align-items: center;
+ margin-bottom: 8px;
+ margin-top: 8px;
 }

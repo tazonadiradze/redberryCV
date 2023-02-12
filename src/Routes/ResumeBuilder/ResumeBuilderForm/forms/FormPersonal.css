@@ -1,0 +1,59 @@
+* {
+ margin: 0;
+ padding: 0;
+
+}
+
+.name-surname {
+ display: flex;
+ gap: 64px;
+ width: 846px;
+ height: 148px;
+}
+
+.label-name-p-flex {
+ width: 419px;
+ height: 122px;
+ display: flex;
+ flex-direction: column;
+ justify-content: flex-start;
+}
+
+p {
+ margin: 0;
+}
+
+.textarea-div {
+ margin-top: 46px;
+ margin-bottom: 17px;
+}
+
+.textarea {
+ width: 798px;
+ height: 103px;
+ background: #FFFFFF;
+ border: 1px solid #BCBCBC;
+ border-radius: 4px;
+}
+
+
+.grey-text {
+ display: block;
+ font-family: 'Helvetica Neue';
+ font-style: normal;
+ font-weight: 300;
+ font-size: 14px;
+ line-height: 21px;
+ color: #2E2E2E;
+
+}
+
+.input-size {
+ width: 798px;
+ height: 48px;
+}
+
+.input-margin {
+ margin-top: 8px;
+ margin-bottom: 8px;
+}
