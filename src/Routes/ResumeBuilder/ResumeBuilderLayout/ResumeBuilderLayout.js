@@ -1,15 +1,14 @@
 import { useResumeBuilder } from '../../../Providers/ResumeBuilderProvider';
-import Resume from '../Resume/Resume';
+import Resume from '../../../Components/Resume/Resume';
 import './ResumeBuilder.css';
 
 const formStageNames = {
  1: 'Personal',
  2: 'Experiences',
  3: 'Education',
- 
 };
 const ResumeBuilderLayout = ({ children }) => {
- const { stage } = useResumeBuilder();
+ const { stage, personal, experiences, educations } = useResumeBuilder();
 
  return (
   <div className="resume-builder">
@@ -22,7 +21,11 @@ const ResumeBuilderLayout = ({ children }) => {
    </div>
 
    <div className="resume-builder-right">
-    <Resume />
+    <Resume
+     personal={personal}
+     experiences={experiences}
+     educations={educations}
+    />
    </div>
   </div>
  );

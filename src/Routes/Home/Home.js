@@ -2,7 +2,7 @@ import logo from '../../Assets/logo.png';
 import Button from '../../Components/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
-import redberryLogo from '../../Assets/redberryLogo.png'
+import redberryLogo from '../../Assets/redberryLogo.png';
 
 const Home = () => {
  const navigate = useNavigate();
@@ -10,11 +10,11 @@ const Home = () => {
  return (
   <div className="home">
    <img src={redberryLogo} className="redberry-logo" />
-   <div className='hr-line'></div>
+   <div className="hr-line"></div>
    <img src={logo} className="home-logo" />
    <Button
     title="რეზიუმეს დამატება"
-    onClick={() => navigate('/resume')}
+    onClick={() => navigate('/resume-builder')}
     variant="secondary"
    />
   </div>
