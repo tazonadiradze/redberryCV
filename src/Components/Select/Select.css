@@ -1,0 +1,11 @@
+.select-input-variant-success {
+ border: 1px solid #98e37e;
+}
+
+.select-input-variant-error {
+ border: 1px solid #ef5050;
+}
+
+.select-input-variant-default {
+ border: 1px solid #bcbcbc;
+}

@@ -1,61 +1,87 @@
 import Input from '../../../../Components/Input/Input';
-
 import Date from '../../../../Components/Date/Date';
 import Form from '../../../../Components/Form/Form';
 import Button from '../../../../Components/Button/Button';
 import { useState } from 'react';
-import { useResumeBuilder } from '../../../../Providers/ResumeBuilderProvider';
+import {
+ useResumeBuilder,
+ initialExperienceValues,
+} from '../../../../Providers/ResumeBuilderProvider';
 import { experiencesArrayValidationSchema } from '../../../../Validation/validationSchemas';
 import { validateArray } from '../../../../Validation/utils';
 import FormButtons from './FormButtons/FormButtons';
 
-const mainformFields = {
- employer: '',
- position: '',
- start_date: '',
- due_date: '',
- description: '',
+const initialTouchedValues = {
+ employer: false,
+ position: false,
+ start_date: false,
+ due_date: false,
+ description: false,
 };
 
 const FormExperience = () => {
- const { handleSaveFormValues, handleNavigateToNextStage } = useResumeBuilder();
- const [values, setValues] = useState([mainformFields]);
- const [submitted, setSubmitted] = useState(false);
+ const { handleSaveFormValues, handleNavigateToNextStage, experiences } =
+  useResumeBuilder();
+ const [touched, setTouched] = useState([initialTouchedValues]);
  const [errors, setErrors] = useState({});
 
- const handleValidationUpdate = async () => {
-  const errors = await validateArray(experiencesArrayValidationSchema, values);
+ const handleValidationUpdate = async (validatingValues) => {
+  const errors = await validateArray(
+   experiencesArrayValidationSchema,
+   validatingValues
+  );
   setErrors(errors);
  };
 
  const onChange = (e, name, index) => {
   const value = e.target.value;
-  const updatedState = values.map((item, i) => {
+  const updatedExperiences = experiences.map((item, i) => {
    if (i === index) {
-    return { ...values[index], [name]: value };
+    return { ...experiences[index], [name]: value };
    }
    return item;
   });
 
-  setValues(updatedState);
-  if (submitted) {
-   handleValidationUpdate();
-  }
+  setTouched((prev) => {
+   return prev.map((item, i) => {
+    if (i === index) {
+     return { ...prev[index], [name]: true };
+    }
+    return item;
+   });
+  });
+  handleSaveFormValues('experiences', updatedExperiences);
+  handleValidationUpdate(updatedExperiences);
+ };
+
+ const setAllTouched = () => {
+  setTouched((prev) => {
+   return prev.map((experience) => {
+    const updatedExperience = { ...experience };
+    Object.keys(updatedExperience).forEach(
+     (key) => (updatedExperience[key] = true)
+    );
+    return updatedExperience;
+   });
+  });
  };
 
  const handleSubmit = async () => {
-  setSubmitted(true);
-  const errors = await validateArray(experiencesArrayValidationSchema, values);
+  setAllTouched();
+  handleValidationUpdate(experiences);
+  const errors = await validateArray(
+   experiencesArrayValidationSchema,
+   experiences
+  );
   if (Object.keys(errors)?.length) {
    setErrors(errors);
   } else {
-   handleSaveFormValues('experiences', values);
    handleNavigateToNextStage();
   }
  };
 
  const getFieldVariant = (name, i) => {
-  if (!submitted) return 'default';
+  if (!touched[i]?.[name]) return 'default';
   if (errors[i]) {
    const errorObject = errors[i];
    return errorObject[name] ? 'error' : 'success';
@@ -63,13 +89,20 @@ const FormExperience = () => {
   return 'success';
  };
 
+ const handleAddAdditional = () => {
+  setTouched((prev) => [...prev, initialTouchedValues]);
+  handleSaveFormValues('experiences', [
+   ...experiences,
+   initialExperienceValues,
+  ]);
+ };
+
  return (
   <div>
    <Form>
-    {values.map((eachObj, index) => {
+    {experiences.map((eachObj, index) => {
      return (
-      <div className='Wrapper-div'>
-
+      <div className="Wrapper-div" key={index}>
        <Input
         type="text"
         variant={getFieldVariant('position', index)}
@@ -82,7 +115,6 @@ const FormExperience = () => {
         onChange={(event) => onChange(event, 'employer', index)}
         value={eachObj.employer}
        />
-
        <Date
         variant={getFieldVariant('start_date', index)}
         onChange={(event) => onChange(event, 'start_date', index)}
@@ -102,10 +134,7 @@ const FormExperience = () => {
      );
     })}
 
-    <Button
-     onClick={() => setValues([...values, mainformFields])}
-     title="add experience"
-    />
+    <Button onClick={handleAddAdditional} title="add experience" />
     <FormButtons onNext={handleSubmit} />
    </Form>
   </div>

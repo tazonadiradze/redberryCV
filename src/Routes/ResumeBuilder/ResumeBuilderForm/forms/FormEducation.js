@@ -3,31 +3,37 @@ import Form from '../../../../Components/Form/Form';
 import { useEffect, useState } from 'react';
 import axios from '../../.../../../../Utils/Axios';
 import FormButtons from './FormButtons/FormButtons';
-import { useResumeBuilder } from '../../../../Providers/ResumeBuilderProvider';
+import {
+ useResumeBuilder,
+ initialEducationValues,
+} from '../../../../Providers/ResumeBuilderProvider';
 import Button from '../../../../Components/Button/Button';
 import Date from '../../../../Components/Date/Date';
+import Select from '../../../../Components/Select/Select';
+import { validateArray } from '../../../../Validation/utils';
+import { educationsArrayValidationSchema } from '../../../../Validation/validationSchemas';
 
-
-const educationFormFields = {
- institute: '',
- degree: '',
- due_date: '',
- description: ''
-}
+const initialTouchedValues = {
+ institute: false,
+ degree: false,
+ due_date: false,
+ description: false,
+};
 
 const FormEducation = () => {
  const [data, setData] = useState(null);
- const [values, setValues] = useState([educationFormFields]);
  const [error, setError] = useState(null);
  const [loading, setLoading] = useState(false);
- const { handleSaveFormValues, handleNavigateToNextStage } = useResumeBuilder();
+ const [touched, setTouched] = useState([initialTouchedValues]);
+ const [errors, setErrors] = useState({});
+ const { handleSaveFormValues, handleNavigateToNextStage, educations } =
+  useResumeBuilder();
 
  useEffect(() => {
   const fetchData = async () => {
    setLoading(true);
    try {
-    const result = await axios.get('api/degrees');
-
+    const result = await axios.get('/degrees');
     setData(result.data);
    } catch (error) {
     setError(error);
@@ -38,31 +44,75 @@ const FormEducation = () => {
   fetchData();
  }, []);
 
+ const handleValidationUpdate = async (validatingValues) => {
+  const errors = await validateArray(
+   educationsArrayValidationSchema,
+   validatingValues
+  );
+  setErrors(errors);
+ };
 
  const onChange = (e, name, index) => {
-  const value = e.target.value
-  const uptaded = values.map((item, i) => {
+  const value = e.target.value;
+  const updatedEducations = educations.map((item, i) => {
    if (i === index) {
-
-    return { ...values[index], [name]: value }
+    return { ...educations[index], [name]: value };
    }
-   return item
-  })
+   return item;
+  });
 
-  setValues(uptaded)
-  console.log(uptaded)
- }
-
-
-
-
-
- const handleFormSubmit = () => {
-  //first validate form
-  //submit if valid;
-  handleSaveFormValues('educations', values);
-  handleNavigateToNextStage();
+  setTouched((prev) => {
+   return prev.map((item, i) => {
+    if (i === index) {
+     return { ...prev[index], [name]: true };
+    }
+    return item;
+   });
+  });
+  handleSaveFormValues('educations', updatedEducations);
+  handleValidationUpdate(updatedEducations);
  };
+
+ const getFieldVariant = (name, i) => {
+  if (!touched[i]?.[name]) return 'default';
+  if (errors[i]) {
+   const errorObject = errors[i];
+   return errorObject[name] ? 'error' : 'success';
+  }
+  return 'success';
+ };
+
+ const setAllTouched = () => {
+  setTouched((prev) => {
+   return prev.map((education) => {
+    const updatedEducation = { ...education };
+    Object.keys(updatedEducation).forEach(
+     (key) => (updatedEducation[key] = true)
+    );
+    return updatedEducation;
+   });
+  });
+ };
+
+ const handleFormSubmit = async () => {
+  setAllTouched();
+  handleValidationUpdate(educations);
+  const errors = await validateArray(
+   educationsArrayValidationSchema,
+   educations
+  );
+  if (Object.keys(errors)?.length) {
+   setErrors(errors);
+  } else {
+   handleNavigateToNextStage();
+  }
+ };
+
+ const handleAddAdditional = () => {
+  setTouched((prev) => [...prev, initialTouchedValues]);
+  handleSaveFormValues('educations', [...educations, initialEducationValues]);
+ };
+
  if (loading) {
   return <div>Loading...</div>;
  }
@@ -72,33 +122,44 @@ const FormEducation = () => {
  } else {
  }
 
-
  if (data) {
-
   return (
    <Form>
     <div>
-     {values.map((eachObj, index) => {
+     {educations.map((eachObj, index) => {
       return (
        <div>
-        <Input onChange={(event) => onChange(event, 'institute', index)} value={eachObj.institute} />
-        <Date onChange={(event) => onChange(event, 'due_date', index)} value={eachObj.due_date} />
-        <Input onChange={(event) => onChange(event, 'description', index)} value={eachObj.description} />
-        <select onChange={(event) => onChange(event, 'degree', index)} value={eachObj.degree} >
+        <Input
+         onChange={(event) => onChange(event, 'institute', index)}
+         value={eachObj.institute}
+         variant={getFieldVariant('institute', index)}
+        />
+        <Date
+         onChange={(event) => onChange(event, 'due_date', index)}
+         value={eachObj.due_date}
+         variant={getFieldVariant('due_date', index)}
+        />
+        <Input
+         onChange={(event) => onChange(event, 'description', index)}
+         value={eachObj.description}
+         variant={getFieldVariant('description', index)}
+        />
+        <Select
+         onChange={(event) => onChange(event, 'degree', index)}
+         value={eachObj.degree}
+         variant={getFieldVariant('degree', index)}
+        >
          {data.map((item, index) => (
-          <option  >{item.title}  </option>
+          <option key={index}>{item.title} </option>
          ))}
-        </select>
+        </Select>
        </div>
-
-      )
+      );
      })}
-
     </div>
-    <Button title='სხვა სასწავლებლის დამატება' onClick={() => setValues([...values, educationFormFields])} />
+    <Button title="სხვა სასწავლებლის დამატება" onClick={handleAddAdditional} />
     <FormButtons onNext={handleFormSubmit} />
    </Form>
-
   );
  }
 };

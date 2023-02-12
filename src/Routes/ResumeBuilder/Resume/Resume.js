@@ -59,8 +59,6 @@ const Resume = () => {
   })
  }
 
- console.log({ form });
-
  return (
   <div className="resume">
    <img src={resumeLogo} className="resume-logo" />

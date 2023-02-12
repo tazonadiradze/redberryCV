@@ -1,20 +1,17 @@
-const Date = ({ onChange, label, name, value }) => {
+import './Date.css';
+
+const Date = ({ onChange, label, value, variant, className, ...rest }) => {
  return (
   <div>
    <label>{label}</label>
    <input
-    type='date'
-    name={name}
+    className={`date-input date-input-variant-${variant} ${className}`}
+    type="date"
     value={value}
-
     onChange={onChange}
-
+    {...rest}
    />
   </div>
-
- )
-
-}
-
-
-export default Date
+ );
+};
+export default Date;

@@ -4,9 +4,9 @@ const yup = require('yup');
 export const personalValidationSchema = yup.object().shape({
  name: yup.string().required(),
  surname: yup.string().required(),
- aboutMe: yup.string().required(),
+ image: yup.string().required(),
  email: yup.string().required(),
- number: yup.number().required(),
+ phone_number: yup.number().required(),
 });
 
 export const experienceValidationSchema = yup.object().shape({
@@ -17,8 +17,17 @@ export const experienceValidationSchema = yup.object().shape({
  description: yup.string().required(),
 });
 
-
-
 export const experiencesArrayValidationSchema = yup
  .array()
  .of(experienceValidationSchema);
+
+export const educationValidationSchema = yup.object().shape({
+ institute: yup.string().required(),
+ degree: yup.string().required(),
+ due_date: yup.string().required(),
+ description: yup.string().required(),
+});
+
+export const educationsArrayValidationSchema = yup
+ .array()
+ .of(educationValidationSchema);

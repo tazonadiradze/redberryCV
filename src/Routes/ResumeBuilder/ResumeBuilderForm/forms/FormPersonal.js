@@ -5,137 +5,137 @@ import { useResumeBuilder } from '../../../../Providers/ResumeBuilderProvider';
 import { personalValidationSchema } from '../../../../Validation/validationSchemas';
 import { validateObject } from '../../../../Validation/utils';
 import FormButtons from './FormButtons/FormButtons';
-import './FormPersonal.css'
+import './FormPersonal.css';
 
-const formFields = {
- name: '',
- surname: '',
- aboutMe: '',
- email: '',
- number: '',
- image: ''
+const initialTouchedFields = {
+ name: false,
+ surname: false,
+ aboutMe: false,
+ email: false,
+ phone_number: false,
+ image: false,
 };
 
 const FormPersonal = () => {
-
- const [image, setImage] = useState(null);
-
- const handleChange = (event) => {
-  if (submitted) {
-   handleValidationUpdate();
-  }
-  setImage(URL.createObjectURL(event.target.files[0]));
- };
-
-
-
- const { handleSaveFormValues, handleNavigateToNextStage } = useResumeBuilder();
- const [values, setValues] = useState(formFields);
- const [submitted, setSubmitted] = useState(false);
+ const { handleSaveFormValues, handleNavigateToNextStage, personal } =
+  useResumeBuilder();
+ const [touched, setTouched] = useState(initialTouchedFields);
  const [errors, setErrors] = useState({});
 
-
- const handleValidationUpdate = async () => {
-  const errors = await validateObject(personalValidationSchema, values);
+ const handleValidationUpdate = async (validatingValues) => {
+  const errors = await validateObject(
+   personalValidationSchema,
+   validatingValues
+  );
   setErrors(errors);
  };
 
-
- const onChange = (name, event) => {
-  setValues({ ...values, [name]: event.target.value });
-  if (submitted) {
-   handleValidationUpdate();
-  }
+ const onChange = async (name, value) => {
+  const newValues = { ...personal, [name]: value };
+  setTouched((prev) => ({ ...prev, [name]: true }));
+  handleSaveFormValues('personal', newValues);
+  handleValidationUpdate(newValues);
  };
 
+ const handleImageChange = (event) => {
+  const file = event.target.files[0];
+  onChange('image', URL.createObjectURL(file));
+ };
 
+ const setAllTouched = () => {
+  setTouched((prev) => {
+   const updated = { ...prev };
+   Object.keys(updated).forEach((key) => (updated[key] = true));
+   return updated;
+  });
+ };
  const handleSubmit = async () => {
-  setSubmitted(true);
-  const errors = await validateObject(personalValidationSchema, values);
+  setAllTouched();
+  const errors = await validateObject(personalValidationSchema, personal);
   if (Object.keys(errors).length) {
    setErrors(errors);
   } else {
-   handleSaveFormValues('personal', values);
    handleNavigateToNextStage();
   }
  };
 
-
  const getFieldVariant = (name) => {
-  if (!submitted) return 'default';
+  if (!touched[name]) return 'default';
   return errors[name] ? 'error' : 'success';
  };
 
-
  return (
   <div className="wrapper-div text">
-   <Form initialValue={formFields} onSubmit={() => { }}>
-    <div className='name-surname'>
-     <div className='label-name-p-flex text '>
+   <Form>
+    <div className="name-surname">
+     <div className="label-name-p-flex text ">
       <Input
        className="input-margin"
        label="სახელი"
        type="text"
-       onChange={(event) => onChange('name', event)}
+       onChange={({ target }) => onChange('name', target.value)}
        variant={getFieldVariant('name')}
-       value={values.name}
+       value={personal.name}
       />
-      <p className='grey-text'>მინიმუმ 2 ასო, ქართული ასოები</p>
+      <p className="grey-text">მინიმუმ 2 ასო, ქართული ასოები</p>
      </div>
-     <div className='label-name-p-flex text '>
-      <Input className="input-margin"
-
+     <div className="label-name-p-flex text ">
+      <Input
+       className="input-margin"
        type="text"
-       onChange={(event) => onChange('surname', event)}
+       onChange={({ target }) => onChange('surname', target.value)}
        variant={getFieldVariant('surname')}
        label="გვარი"
-       value={values.surname}
+       value={personal.surname}
       />
-      <p className='grey-text'>მინიმუმ 2 ასო, ქართული ასოები</p>
+      <p className="grey-text">მინიმუმ 2 ასო, ქართული ასოები</p>
      </div>
     </div>
 
     <div>
-     <Input className=" input-margin upload-photo" type="file" onChange={handleChange} variant={getFieldVariant('image')} />
-     {image && <img src={image} alt="Uploaded Image" />}
+     <Input
+      className="input-margin upload-photo"
+      type="file"
+      onChange={handleImageChange}
+      variant={getFieldVariant('image')}
+     />
+     {personal?.image && <img src={personal?.image} alt="Uploaded Image" />}
     </div>
 
-    <div className='textarea-div'>
+    <div className="textarea-div">
      <Input
       className="textarea input-margin"
       type="text"
-      variant={getFieldVariant('aboutMe')}
-      onChange={(event) => onChange('aboutMe', event)}
+      variant={getFieldVariant('about_me')}
+      onChange={({ target }) => onChange('about_me', target.value)}
       label="ჩემ შესახებ (არასავალდებულო)"
-      value={values.aboutMe}
-
+      value={personal.about_me}
      />
-
     </div>
-    <div className='label-name-p-flex text mail '>
+    <div className="label-name-p-flex text mail ">
      <Input
-      className='input-size input-margin'
+      className="input-size input-margin"
       type="email"
       variant={getFieldVariant('email')}
-      onChange={(event) => onChange('email', event)}
+      onChange={({ target }) => onChange('email', target.value)}
       label="ელ.ფოსტა"
-      value={values.email}
-
+      value={personal.email}
      />
-     <p className='grey-text'>უნდა მთავრდებოდეს @redberry.ge-ით</p>
+     <p className="grey-text">უნდა მთავრდებოდეს @redberry.ge-ით</p>
     </div>
 
-    <div className='text'>
+    <div className="text">
      <Input
-      className='input-size input-margin'
+      className="input-size input-margin"
       type="tel"
       variant={getFieldVariant('number')}
-      onChange={(event) => onChange('number', event)}
+      onChange={({ target }) => onChange('phone_number', target.value)}
       label="მობილურის ნომერი"
-      value={values.number}
+      value={personal.phone_number}
      />
-     <p className='grey-text'>უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს</p>
-
+     <p className="grey-text">
+      უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს
+     </p>
     </div>
     <FormButtons onNext={handleSubmit} />
    </Form>

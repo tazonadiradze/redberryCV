@@ -1,6 +1,7 @@
-import './Input.css'
+import './Input.css';
 
-const variant = 'default' | 'success' | 'error'
+// variant = 'default' | 'success' | 'error'
+
 const Input = ({
  label,
  value,
@@ -12,22 +13,18 @@ const Input = ({
  ...rest
 }) => {
  return (
-  <div >
-   {Boolean(label) && <label className='label'>{label}</label>}
-   <input className={`input input-variant-${variant} ${className}`}
-
+  <div>
+   {Boolean(label) && <label className="label">{label}</label>}
+   <input
+    className={`input input-variant-${variant} ${className}`}
     type={type}
     value={value}
     name={name}
     onChange={onChange}
-
     {...rest}
    />
   </div>
- )
-
-
-
-}
+ );
+};
 
 export default Input;

@@ -1,0 +1,20 @@
+.date-input {
+ width: 371px;
+ height: 56px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ margin: 0;
+}
+
+.date-input-variant-success {
+ border: 1px solid #98e37e;
+}
+
+.date-input-variant-error {
+ border: 1px solid #ef5050;
+}
+
+.date-input-variant-default {
+ border: 1px solid #bcbcbc;
+}
