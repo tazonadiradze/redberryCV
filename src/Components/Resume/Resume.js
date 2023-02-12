@@ -9,9 +9,12 @@ const Resume = ({ personal, experiences, educations }) => {
     <h1>
      {personal.name} {personal.surname}
     </h1>
+
     <h3 className="text">{personal.aboutMe}</h3>
     <h3 className="text">{personal.email}</h3>
-    <h3 className="text">{personal.number}</h3>
+    <h3 className="text">{personal.phone_number}</h3>
+    <img src={personal.image} />
+
    </section>
   );
  };

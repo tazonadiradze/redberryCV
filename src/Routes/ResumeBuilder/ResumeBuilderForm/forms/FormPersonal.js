@@ -17,8 +17,7 @@ const initialTouchedFields = {
 };
 
 const FormPersonal = () => {
- const { handleSaveFormValues, handleNavigateToNextStage, personal } =
-  useResumeBuilder();
+ const { handleSaveFormValues, handleNavigateToNextStage, personal } = useResumeBuilder();
  const [touched, setTouched] = useState(initialTouchedFields);
  const [errors, setErrors] = useState({});
 
@@ -56,6 +55,7 @@ const FormPersonal = () => {
    setErrors(errors);
   } else {
    handleNavigateToNextStage();
+
   }
  };
 
@@ -99,17 +99,16 @@ const FormPersonal = () => {
       onChange={handleImageChange}
       variant={getFieldVariant('image')}
      />
-     {personal?.image && <img src={personal?.image} alt="Uploaded Image" />}
+     {personal?.image && <img src={personal.image} alt="Uploaded Image" />}
     </div>
-
     <div className="textarea-div">
      <Input
       className="textarea input-margin"
       type="text"
-      variant={getFieldVariant('about_me')}
-      onChange={({ target }) => onChange('about_me', target.value)}
+      variant={getFieldVariant('aboutMe')}
+      onChange={({ target }) => onChange('aboutMe', target.value)}
       label="ჩემ შესახებ (არასავალდებულო)"
-      value={personal.about_me}
+      value={personal.aboutMe}
      />
     </div>
     <div className="label-name-p-flex text mail ">
@@ -128,7 +127,7 @@ const FormPersonal = () => {
      <Input
       className="input-size input-margin"
       type="tel"
-      variant={getFieldVariant('number')}
+      variant={getFieldVariant('phone_number')}
       onChange={({ target }) => onChange('phone_number', target.value)}
       label="მობილურის ნომერი"
       value={personal.phone_number}
