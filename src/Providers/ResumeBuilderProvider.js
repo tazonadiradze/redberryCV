@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useReducer } from 'react';
 import axios from '../Utils/Axios';
 import { getFromLocalStorage, saveToLocalStorage } from '../Utils/Utils';
+import { convertToFile } from '../Utils/Utils';
 export const ResumeBuilderContext = createContext({});
 
 export const useResumeBuilder = () => useContext(ResumeBuilderContext);
@@ -54,8 +55,6 @@ const ResumeBuilderProvider = ({ children }) => {
   initialStateValues
  );
 
- console.log({ state });
-
  useEffect(() => {
   const savedState = getFromLocalStorage();
   if (savedState) {
@@ -80,17 +79,14 @@ const ResumeBuilderProvider = ({ children }) => {
 
  const handleCreate = async () => {
   const { experiences, educations, personal } = state.form;
+  const fileFromURL = await convertToFile(personal.image);
   const payload = {
    experiences,
    educations,
    ...personal,
+   image: fileFromURL,
   };
-  const formData = new FormData();
-  Object.keys(personal).forEach((key) => {
-   formData.append(key, payload[key]);
-  });
-  formData.append('experiences', JSON.stringify(experiences));
-  formData.append('educations', JSON.stringify(educations));
+
   try {
    await axios.post('/cvs', payload, {
     headers: { 'Content-Type': 'multipart/form-data' },

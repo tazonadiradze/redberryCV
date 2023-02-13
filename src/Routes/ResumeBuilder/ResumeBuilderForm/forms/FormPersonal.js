@@ -5,6 +5,7 @@ import { useResumeBuilder } from '../../../../Providers/ResumeBuilderProvider';
 import { personalValidationSchema } from '../../../../Validation/validationSchemas';
 import { validateObject } from '../../../../Validation/utils';
 import FormButtons from './FormButtons/FormButtons';
+import { convertToURL } from '../../../../Utils/Utils';
 import './FormPersonal.css';
 
 const initialTouchedFields = {
@@ -37,9 +38,10 @@ const FormPersonal = () => {
   handleValidationUpdate(newValues);
  };
 
- const handleImageChange = (event) => {
+ const handleImageChange = async (event) => {
   const file = event.target.files[0];
-  onChange('image', file);
+  const url = await convertToURL(file);
+  onChange('image', url);
  };
 
  const setAllTouched = () => {

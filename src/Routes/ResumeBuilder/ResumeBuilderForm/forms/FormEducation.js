@@ -73,7 +73,6 @@ const FormEducation = () => {
   handleValidationUpdate(updatedEducations);
  };
 
- console.log({ educations });
  const getFieldVariant = (name, i) => {
   if (!touched[i]?.[name]) return 'default';
   if (errors[i]) {
