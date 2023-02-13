@@ -92,7 +92,7 @@ const ResumeBuilderProvider = ({ children }) => {
     headers: { 'Content-Type': 'multipart/form-data' },
    });
    setState({ isResumeCreated: true });
-  } catch (err) {}
+  } catch (err) { }
  };
 
  const handleNavigateToNextStage = () => {

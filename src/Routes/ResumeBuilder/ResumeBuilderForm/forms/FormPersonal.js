@@ -142,7 +142,10 @@ const FormPersonal = () => {
      </p>
     </div>
    </Form>
-   <FormButtons onNext={handleSubmit} />
+   <div className='FormButtons'>
+
+    <FormButtons onNext={handleSubmit} />
+   </div>
   </div>
  );
 };

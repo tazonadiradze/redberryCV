@@ -20,6 +20,7 @@ const Resume = ({ personal, experiences, educations }) => {
  };
 
  const renderExperiencesInfo = () => {
+
   if (!experiences.length) return null;
   return experiences.map((experience, i) => {
    const { position, description, employer, start_date, due_date } = experience;
@@ -35,7 +36,7 @@ const Resume = ({ personal, experiences, educations }) => {
       <p className="">{due_date}</p>
      </div>
 
-     <p className=" cv-margin">description:{description}</p>
+     <p className=" cv-margin">{description}</p>
     </section>
    );
   });

@@ -157,7 +157,9 @@ const FormExperience = () => {
     })}
     <div className='line-gray'></div>
     <Button className='add-another-one' onClick={handleAddAdditional} title="მეტი გამოცდილების დამატება" />
-    <FormButtons className="bttnn" onNext={handleSubmit} />
+    <div className='FormButtons'>
+     <FormButtons onNext={handleSubmit} />
+    </div>
    </Form>
   </div>
  );

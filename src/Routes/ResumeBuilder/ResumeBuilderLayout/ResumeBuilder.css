@@ -18,6 +18,7 @@
  flex: 1.4;
  background-color: rgb(251, 247, 247);
  padding: 49px 126px 65px 126px;
+ ;
 }
 
 .resume-builder-right {
@@ -36,6 +37,63 @@
 }
 
 .resume-created {
+ position: absolute;
+ width: 822px;
+ height: 1090px;
+ left: calc(50% - 822px/2 + 16px);
+ top: 67px;
+}
+
+.cv-image {
+ position: absolute;
+ left: 85%;
+ top: 3%
+}
+
+.backdiv {
+ position: absolute;
+ left: 3%;
+ top: 5%
+}
+
+.back {
  display: flex;
- height: 100vh;
+ justify-content: center;
+ align-items: center;
+ line-height: 80px;
+ width: 40px;
+ height: 40px;
+ font-size: 1em;
+ font-weight: bold;
+ border-radius: 50%;
+ background-color: #F9F9F9;
+ color: white;
+ text-align: center;
+ cursor: pointer;
+ color: black;
+
+}
+
+.resume-sent {
+ padding: 28px 30px 30px;
+ gap: 10px;
+ width: 400px;
+ height: 100px;
+ position: absolute;
+ left: 130%;
+ top: 5%;
+ background: #FFFFFF;
+ border: 1px solid #E4E4E4;
+ box-shadow: 0px 4px 28px rgba(0, 0, 0, 0.25);
+ border-radius: 8px;
+}
+
+.remove-button {
+ padding-left: 95%;
+}
+
+.resume-logo {
+ position: absolute;
+ top: 98%;
+ left: 10%
 }

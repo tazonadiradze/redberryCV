@@ -198,7 +198,10 @@ const FormEducation = () => {
      title="სხვა სასწავლებლის დამატება"
      onClick={handleAddAdditional}
     />
-    <FormButtons onNext={handleFormSubmit} />
+    <div className='FormButtons'>
+
+     <FormButtons onNext={handleFormSubmit} />
+    </div>
    </Form>
   );
  }

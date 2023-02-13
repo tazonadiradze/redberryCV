@@ -103,3 +103,9 @@
  width: 390px;
  height: 60px;
 }
+
+.FormButtons {
+ position: absolute;
+ left: 8.5%;
+ top: 95%
+}
