@@ -129,35 +129,53 @@ const FormEducation = () => {
      {educations.map((eachObj, index) => {
       return (
        <div>
-        <Input
-         onChange={(event) => onChange(event, 'institute', index)}
-         value={eachObj.institute}
-         variant={getFieldVariant('institute', index)}
-        />
-        <Date
-         onChange={(event) => onChange(event, 'due_date', index)}
-         value={eachObj.due_date}
-         variant={getFieldVariant('due_date', index)}
-        />
-        <Input
-         onChange={(event) => onChange(event, 'description', index)}
-         value={eachObj.description}
-         variant={getFieldVariant('description', index)}
-        />
-        <Select
-         onChange={(event) => onChange(event, 'degree', index)}
-         value={eachObj.degree}
-         variant={getFieldVariant('degree', index)}
-        >
-         {data.map((item, index) => (
-          <option key={index}>{item.title} </option>
-         ))}
-        </Select>
+        <div className=" gap-between-inputs">
+
+         <Input
+          className='input-size'
+          label="სასწავლებელი"
+          placeholder='სასწავლებელი'
+          onChange={(event) => onChange(event, 'institute', index)}
+          value={eachObj.institute}
+          variant={getFieldVariant('institute', index)}
+         />
+        </div>
+        <div className='date-inputs input-margin gap-between-inputs'>
+         <Select
+          className='select-or-date-input-size'
+          onChange={(event) => onChange(event, 'degree', index)}
+          value={eachObj.degree}
+          variant={getFieldVariant('degree', index)}
+         >
+          {data.map((item, index) => (
+           <option key={index}>{item.title} </option>
+          ))}
+         </Select>
+         <Date
+          className='select-or-date-input-size'
+          onChange={(event) => onChange(event, 'due_date', index)}
+          value={eachObj.due_date}
+          variant={getFieldVariant('due_date', index)}
+         />
+        </div>
+
+
+        <div className='gap-between-inputs'>
+         <Input
+          className='textarea-size input-margin '
+          label="აღწერა"
+          placeholder='განათლების აღწერა'
+          onChange={(event) => onChange(event, 'description', index)}
+          value={eachObj.description}
+          variant={getFieldVariant('description', index)}
+         />
+        </div>
+
        </div>
       );
      })}
     </div>
-    <Button title="სხვა სასწავლებლის დამატება" onClick={handleAddAdditional} />
+    <Button className='add-another-one' title="სხვა სასწავლებლის დამატება" onClick={handleAddAdditional} />
     <FormButtons onNext={handleFormSubmit} />
    </Form>
   );

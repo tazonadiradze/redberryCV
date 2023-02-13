@@ -65,10 +65,10 @@ const FormPersonal = () => {
  };
 
  return (
-  <div className="wrapper-div text">
+  <div className="text form-personal">
    <Form>
     <div className="name-surname">
-     <div className="label-name-p-flex text ">
+     <div className=" ">
       <Input
        className="input-margin"
        label="სახელი"
@@ -79,7 +79,7 @@ const FormPersonal = () => {
       />
       <p className="grey-text">მინიმუმ 2 ასო, ქართული ასოები</p>
      </div>
-     <div className="label-name-p-flex text ">
+     <div className="">
       <Input
        className="input-margin"
        type="text"
@@ -93,17 +93,20 @@ const FormPersonal = () => {
     </div>
 
     <div>
-     <Input
-      className="input-margin upload-photo"
-      type="file"
-      onChange={handleImageChange}
-      variant={getFieldVariant('image')}
-     />
-     {personal?.image && <img src={personal.image} alt="Uploaded Image" />}
+     <div className='upload-photo'>
+      <label htmlFor='photo'>პირადი ფოტოს ატვირთვა</label>
+      <Input
+       name='photo'
+       className="input-margin"
+       type="file"
+       onChange={handleImageChange}
+       variant={getFieldVariant('image')}
+      />
+     </div>
     </div>
-    <div className="textarea-div">
+    <div className="textarea-margins">
      <Input
-      className="textarea input-margin"
+      className="textarea-size input-margin"
       type="text"
       variant={getFieldVariant('aboutMe')}
       onChange={({ target }) => onChange('aboutMe', target.value)}
@@ -111,7 +114,7 @@ const FormPersonal = () => {
       value={personal.aboutMe}
      />
     </div>
-    <div className="label-name-p-flex text mail ">
+    <div className="gap-between-inputs">
      <Input
       className="input-size input-margin"
       type="email"
@@ -123,7 +126,7 @@ const FormPersonal = () => {
      <p className="grey-text">უნდა მთავრდებოდეს @redberry.ge-ით</p>
     </div>
 
-    <div className="text">
+    <div className='gap-between-inputs'>
      <Input
       className="input-size input-margin"
       type="tel"
@@ -136,8 +139,8 @@ const FormPersonal = () => {
       უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს
      </p>
     </div>
-    <FormButtons onNext={handleSubmit} />
    </Form>
+   <FormButtons onNext={handleSubmit} />
   </div>
  );
 };

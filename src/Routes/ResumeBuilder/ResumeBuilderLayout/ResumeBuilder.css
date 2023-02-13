@@ -7,7 +7,6 @@
  display: flex;
  justify-content: space-between;
  border-bottom: 2px solid black;
- padding: 10px;
 }
 
 .resume-builder-content {
@@ -18,7 +17,7 @@
 .resume-builder-left {
  flex: 1.4;
  background-color: rgb(251, 247, 247);
- padding: 0 30px;
+ padding: 49px 126px 65px 126px;
 }
 
 .resume-builder-right {
@@ -34,4 +33,5 @@
  font-size: 24px;
  line-height: 29px;
  color: #1A1A1A;
+ padding-bottom: 12px;
 }

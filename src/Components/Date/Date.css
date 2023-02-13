@@ -18,3 +18,10 @@
 .date-input-variant-default {
  border: 1px solid #bcbcbc;
 }
+
+.label {
+ display: flex;
+ justify-content: flex-start;
+ align-items: center;
+ margin-bottom: 8px;
+}

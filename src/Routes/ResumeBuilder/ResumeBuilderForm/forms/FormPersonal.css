@@ -4,38 +4,31 @@
 
 }
 
+.form-personal {
+ padding-top: 69px;
+ display: flex;
+ flex-direction: column;
+}
+
 .name-surname {
  display: flex;
- gap: 64px;
+ column-gap: 50px;
  width: 846px;
  height: 148px;
 }
 
-.label-name-p-flex {
- width: 419px;
- height: 122px;
- display: flex;
- flex-direction: column;
- justify-content: flex-start;
-}
-
-p {
- margin: 0;
-}
-
-.textarea-div {
+.textarea-margins {
  margin-top: 46px;
  margin-bottom: 17px;
 }
 
-.textarea {
+.textarea-size {
  width: 798px;
  height: 103px;
  background: #FFFFFF;
  border: 1px solid #BCBCBC;
  border-radius: 4px;
 }
-
 
 .grey-text {
  display: block;
@@ -56,4 +49,57 @@ p {
 .input-margin {
  margin-top: 8px;
  margin-bottom: 8px;
+}
+
+.upload-photo {
+ display: flex;
+ justify-content: flex-start;
+ align-items: center;
+}
+
+.gap-between-inputs {
+ margin-top: 20px;
+
+}
+
+.form-buttons {
+ position: absolute;
+ left: 40%;
+ bottom: 5%;
+}
+
+.date-inputs {
+ display: flex;
+ align-items: center;
+ column-gap: 50px;
+}
+
+.add-another-one {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ width: 289px;
+ height: 48px;
+ border-radius: 4px;
+ background: #62a1eb;
+ border: none;
+ color: #ffffff;
+}
+
+.line-gray {
+ width: 798px;
+ height: 0px;
+ border: 1px solid #C1C1C1;
+ margin-top: 50px;
+ margin-bottom: 45px;
+}
+
+.bttnn {
+ margin: 20px
+}
+
+
+.select-or-date-input-size {
+ width: 390px;
+ height: 60px;
 }

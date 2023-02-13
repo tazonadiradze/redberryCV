@@ -3,9 +3,9 @@ import Resume from '../../../Components/Resume/Resume';
 import './ResumeBuilder.css';
 
 const formStageNames = {
- 1: 'Personal',
- 2: 'Experiences',
- 3: 'Education',
+ 1: 'პირადი ინფო',
+ 2: 'გამოცდილება',
+ 3: 'განათლება',
 };
 const ResumeBuilderLayout = ({ children }) => {
  const { stage, personal, experiences, educations } = useResumeBuilder();

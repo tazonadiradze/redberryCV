@@ -10,10 +10,10 @@ const Resume = ({ personal, experiences, educations }) => {
      {personal.name} {personal.surname}
     </h1>
 
-    <h3 className="text">{personal.aboutMe}</h3>
-    <h3 className="text">{personal.email}</h3>
-    <h3 className="text">{personal.phone_number}</h3>
-    <img src={personal.image} />
+    <p className="cv-margin">{personal.email}</p>
+    <p className="cv-margin">{personal.phone_number}</p>
+    <p className="cv-margin">{personal.aboutMe}</p>
+    <img className="cv-image" src={personal.image} alt="cv_image" />
 
    </section>
   );
@@ -25,12 +25,17 @@ const Resume = ({ personal, experiences, educations }) => {
    const { position, description, employer, start_date, due_date } = experience;
 
    return (
-    <section key={i} className="resume-section">
-     <h3 className="text">position:{position}</h3>
-     <h3 className="text">{employer}</h3>
-     <h3 className="text">{start_date}</h3>
-     <h3 className="text">{due_date}</h3>
-     <h3 className="text">description:{description}</h3>
+    <section key={i} className="resume-section text">
+     <div className='flex cv-margin'>
+      <p className="">{position}</p>
+      <p className="">{employer}</p>
+     </div>
+     <div className='flex light-grey-text cv-margin'>
+      <p className="">{start_date}</p>
+      <p className="">{due_date}</p>
+     </div>
+
+     <p className=" cv-margin">description:{description}</p>
     </section>
    );
   });
@@ -43,10 +48,10 @@ const Resume = ({ personal, experiences, educations }) => {
 
    return (
     <section key={i}>
-     <h3 className="text">{institute}</h3>
-     <h3 className="text">{due_date}</h3>
-     <h3 className="text">{description}</h3>
-     <h3 className="text">{degree}</h3>
+     <p className="text">{institute}</p>
+     <p className="text">{due_date}</p>
+     <p className="text">{description}</p>
+     <p className="text">{degree}</p>
     </section>
    );
   });
@@ -54,7 +59,7 @@ const Resume = ({ personal, experiences, educations }) => {
 
  return (
   <div className="resume">
-   <img src={resumeLogo} className="resume-logo" />
+   <img src={resumeLogo} className="resume-logo" alt='cv_logo' />
    {/* personal form section */}
    {renderPersonalInfo()}
    {/* experiences form section */}

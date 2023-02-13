@@ -102,40 +102,62 @@ const FormExperience = () => {
    <Form>
     {experiences.map((eachObj, index) => {
      return (
-      <div className="Wrapper-div" key={index}>
-       <Input
-        type="text"
-        variant={getFieldVariant('position', index)}
-        onChange={(event) => onChange(event, 'position', index)}
-        value={eachObj.position}
-       />
-       <Input
-        type="text"
-        variant={getFieldVariant('employer', index)}
-        onChange={(event) => onChange(event, 'employer', index)}
-        value={eachObj.employer}
-       />
-       <Date
-        variant={getFieldVariant('start_date', index)}
-        onChange={(event) => onChange(event, 'start_date', index)}
-        value={eachObj.start_date}
-       />
-       <Date
-        variant={getFieldVariant('due_date', index)}
-        onChange={(event) => onChange(event, 'due_date', index)}
-        value={eachObj.due_date}
-       />
-       <Input
-        variant={getFieldVariant('description', index)}
-        onChange={(event) => onChange(event, 'description', index)}
-        value={eachObj.description}
-       />
+      <div className="Wrapper-div text" key={index}>
+       <div className=" gap-between-inputs">
+        <Input
+         className='input-size input-margin'
+         label="თანამდებობა"
+         type="text"
+         variant={getFieldVariant('position', index)}
+         onChange={(event) => onChange(event, 'position', index)}
+         value={eachObj.position}
+         placeholder='დეველოპერი'
+        />
+        <p className="grey-text">მინიმუმ 2 სიმბოლო</p>
+       </div>
+       <div className='gap-between-inputs'>
+        <Input
+         className='input-size input-margin '
+         label="დამსაქმებელი"
+         type="text"
+         variant={getFieldVariant('employer', index)}
+         onChange={(event) => onChange(event, 'employer', index)}
+         value={eachObj.employer}
+         placeholder='დამსაქმებელი'
+        />
+        <p className="grey-text">მინიმუმ 2 სიმბოლო</p>
+       </div>
+       <div className='date-inputs input-margin gap-between-inputs'>
+        <Date
+         label="დაწყების რიცხვი"
+         variant={getFieldVariant('start_date', index)}
+         onChange={(event) => onChange(event, 'start_date', index)}
+         value={eachObj.start_date}
+        />
+        <Date
+         label="დამთავრების რიცხვი"
+         variant={getFieldVariant('due_date', index)}
+         onChange={(event) => onChange(event, 'due_date', index)}
+         value={eachObj.due_date}
+        />
+       </div>
+       <div className='gap-between-inputs'>
+
+        <Input
+         className='textarea-size input-margin '
+         label="აღწერა"
+         variant={getFieldVariant('description', index)}
+         onChange={(event) => onChange(event, 'description', index)}
+         value={eachObj.description}
+         placeholder='როლი თანამდებობაზე და ზოგადი აღწერა'
+        />
+       </div>
       </div>
      );
     })}
-
-    <Button onClick={handleAddAdditional} title="add experience" />
-    <FormButtons onNext={handleSubmit} />
+    <div className='line-gray'></div>
+    <Button className='add-another-one' onClick={handleAddAdditional} title="მეტი გამოცდილების დამატება" />
+    <FormButtons className="bttnn" onNext={handleSubmit} />
    </Form>
   </div>
  );
