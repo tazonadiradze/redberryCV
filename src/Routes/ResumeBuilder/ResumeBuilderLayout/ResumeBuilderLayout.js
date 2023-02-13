@@ -1,7 +1,7 @@
 import { useResumeBuilder } from '../../../Providers/ResumeBuilderProvider';
 import Resume from '../../../Components/Resume/Resume';
 import './ResumeBuilder.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const formStageNames = {
  1: 'პირადი ინფო',
@@ -11,14 +11,28 @@ const formStageNames = {
 const ResumeBuilderLayout = ({ children }) => {
  const { stage, personal, experiences, educations, isResumeCreated } = useResumeBuilder();
  const [showDiv, setShowDiv] = useState(true)
+ // onbtn click clear localstorage
+ const [existingData, setExistingData] = useState(null);
+ useEffect(() => {
+  const existingDataFromLocalStorage = localStorage.getItem("state");
+  setExistingData(existingDataFromLocalStorage);
+ }, []);
 
+ const handleButtonClick = () => {
+  localStorage.clear();
+  setExistingData(null);
+  window.location.reload();
+  window.location.replace('/');
 
+ };
+
+ // onbtn click clear localstorage
 
  if (isResumeCreated) {
   return (
    <div className="resume-created">
     <div className='backdiv'>
-     <div className='back'>&lt;</div>
+     <div onClick={handleButtonClick} className='back'>&lt;</div>
     </div>
     <Resume
      personal={personal}

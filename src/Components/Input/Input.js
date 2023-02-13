@@ -1,6 +1,6 @@
 import './Input.css';
 
-// variant = 'default' | 'success' | 'error'
+const variant = 'default' | 'success' | 'error'
 
 const Input = ({
  label,
@@ -10,7 +10,9 @@ const Input = ({
  onChange,
  type = 'text',
  variant = 'default',
+ placeholder,
  ...rest
+
 }) => {
  return (
   <div>
@@ -21,6 +23,7 @@ const Input = ({
     value={value}
     name={name}
     onChange={onChange}
+    placeholder={placeholder}
     {...rest}
    />
   </div>
