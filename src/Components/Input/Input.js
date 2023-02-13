@@ -31,6 +31,7 @@ const Input = ({
      <img
       src={variant === 'success' ? successIcon : errorIcon}
       className="input-icon"
+      alt="variant"
      />
     )}
    </div>
