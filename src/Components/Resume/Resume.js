@@ -1,9 +1,22 @@
 import resumeLogo from '../../Assets/resume-logo.svg';
 import './Resume.css';
 
+import { useState } from 'react';
+
+
+
+
+
+
 const Resume = ({ personal, experiences, educations }) => {
+
  const renderPersonalInfo = () => {
+
+
+
+
   if (!Object.keys(personal).length) return null;
+
   return (
    <section className="resume-section">
     <h1>
@@ -11,11 +24,12 @@ const Resume = ({ personal, experiences, educations }) => {
     </h1>
 
     <p className="cv-margin">{personal.email}</p>
+
     <p className="cv-margin">{personal.phone_number}</p>
     <p className="cv-margin">{personal.aboutMe}</p>
-    <img className="cv-image" src={personal.image} alt="cv_image" />
-
+    <img className="cv-image" src={personal.image} />
    </section>
+
   );
  };
 
@@ -60,7 +74,6 @@ const Resume = ({ personal, experiences, educations }) => {
 
  return (
   <div className="resume">
-   <img src={resumeLogo} className="resume-logo" alt='cv_logo' />
    {/* personal form section */}
    {renderPersonalInfo()}
    {/* experiences form section */}

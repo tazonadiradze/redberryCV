@@ -15,7 +15,7 @@ const formStages = {
 const initialPersonalValues = {
  name: '',
  surname: '',
- about_me: '',
+ aboutMe: '',
  email: '',
  phone_number: '',
  image: '',

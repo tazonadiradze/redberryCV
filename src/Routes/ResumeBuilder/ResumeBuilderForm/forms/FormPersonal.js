@@ -113,11 +113,12 @@ const FormPersonal = () => {
      <Textarea
       className="textarea-size input-margin"
       variant={getFieldVariant('aboutMe')}
-      onChange={({ target }) => onChange('about_me', target.value)}
+      onChange={({ target }) => onChange('aboutMe', target.value)}
       label="ჩემ შესახებ (არასავალდებულო)"
       placeholder="ზოგადი ინფო შენს შესახებ"
-      value={personal.about_me}
+      value={personal.aboutMe}
      />
+
     </div>
     <div className="gap-between-inputs">
      <Input
