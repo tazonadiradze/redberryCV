@@ -17,7 +17,8 @@ const initialTouchedFields = {
 };
 
 const FormPersonal = () => {
- const { handleSaveFormValues, handleNavigateToNextStage, personal } = useResumeBuilder();
+ const { handleSaveFormValues, handleNavigateToNextStage, personal } =
+  useResumeBuilder();
  const [touched, setTouched] = useState(initialTouchedFields);
  const [errors, setErrors] = useState({});
 
@@ -38,7 +39,7 @@ const FormPersonal = () => {
 
  const handleImageChange = (event) => {
   const file = event.target.files[0];
-  onChange('image', URL.createObjectURL(file));
+  onChange('image', file);
  };
 
  const setAllTouched = () => {
@@ -55,7 +56,6 @@ const FormPersonal = () => {
    setErrors(errors);
   } else {
    handleNavigateToNextStage();
-
   }
  };
 
@@ -93,10 +93,10 @@ const FormPersonal = () => {
     </div>
 
     <div>
-     <div className='upload-photo'>
-      <label htmlFor='photo'>პირადი ფოტოს ატვირთვა</label>
+     <div className="upload-photo">
+      <label htmlFor="photo">პირადი ფოტოს ატვირთვა</label>
       <Input
-       name='photo'
+       name="photo"
        className="input-margin"
        type="file"
        onChange={handleImageChange}
@@ -126,7 +126,7 @@ const FormPersonal = () => {
      <p className="grey-text">უნდა მთავრდებოდეს @redberry.ge-ით</p>
     </div>
 
-    <div className='gap-between-inputs'>
+    <div className="gap-between-inputs">
      <Input
       className="input-size input-margin"
       type="tel"

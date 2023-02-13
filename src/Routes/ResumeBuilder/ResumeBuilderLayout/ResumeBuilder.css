@@ -23,7 +23,6 @@
 .resume-builder-right {
  background-color: white;
  flex: 1;
-
 }
 
 .heading2 {
@@ -32,6 +31,11 @@
  font-weight: 700;
  font-size: 24px;
  line-height: 29px;
- color: #1A1A1A;
+ color: #1a1a1a;
  padding-bottom: 12px;
+}
+
+.resume-created {
+ display: flex;
+ height: 100vh;
 }

@@ -52,11 +52,11 @@ const FormEducation = () => {
   setErrors(errors);
  };
 
- const onChange = (e, name, index) => {
-  const value = e.target.value;
+ const onChange = (value, name, index) => {
   const updatedEducations = educations.map((item, i) => {
    if (i === index) {
-    return { ...educations[index], [name]: value };
+    const next = { ...educations[index], [name]: value };
+    return next;
    }
    return item;
   });
@@ -73,6 +73,7 @@ const FormEducation = () => {
   handleValidationUpdate(updatedEducations);
  };
 
+ console.log({ educations });
  const getFieldVariant = (name, i) => {
   if (!touched[i]?.[name]) return 'default';
   if (errors[i]) {
@@ -113,6 +114,25 @@ const FormEducation = () => {
   handleSaveFormValues('educations', [...educations, initialEducationValues]);
  };
 
+ const handleDegreeChange = (event, index) => {
+  const selectedIndex = event.target.selectedIndex;
+  const selectedValue = event.target.value;
+  const degree_id = data[selectedIndex].id;
+  handleSaveFormValues(
+   'educations',
+   educations.map((item, i) => {
+    if (i === index) {
+     return {
+      ...educations[index],
+      degree_id: degree_id,
+      degree: selectedValue,
+     };
+    }
+    return item;
+   })
+  );
+ };
+
  if (loading) {
   return <div>Loading...</div>;
  }
@@ -130,52 +150,55 @@ const FormEducation = () => {
       return (
        <div>
         <div className=" gap-between-inputs">
-
          <Input
-          className='input-size'
+          className="input-size"
           label="სასწავლებელი"
-          placeholder='სასწავლებელი'
-          onChange={(event) => onChange(event, 'institute', index)}
+          placeholder="სასწავლებელი"
+          onChange={({ target }) => onChange(target.value, 'institute', index)}
           value={eachObj.institute}
           variant={getFieldVariant('institute', index)}
          />
         </div>
-        <div className='date-inputs input-margin gap-between-inputs'>
+        <div className="date-inputs input-margin gap-between-inputs">
          <Select
-          className='select-or-date-input-size'
-          onChange={(event) => onChange(event, 'degree', index)}
+          className="select-or-date-input-size"
+          onChange={(event) => handleDegreeChange(event, index)}
           value={eachObj.degree}
           variant={getFieldVariant('degree', index)}
          >
-          {data.map((item, index) => (
-           <option key={index}>{item.title} </option>
+          {data.map((item) => (
+           <option id={item.id}>{item.title}</option>
           ))}
          </Select>
          <Date
-          className='select-or-date-input-size'
-          onChange={(event) => onChange(event, 'due_date', index)}
+          className="select-or-date-input-size"
+          onChange={({ target }) => onChange(target.value, 'due_date', index)}
           value={eachObj.due_date}
           variant={getFieldVariant('due_date', index)}
          />
         </div>
 
-
-        <div className='gap-between-inputs'>
+        <div className="gap-between-inputs">
          <Input
-          className='textarea-size input-margin '
+          className="textarea-size input-margin "
           label="აღწერა"
-          placeholder='განათლების აღწერა'
-          onChange={(event) => onChange(event, 'description', index)}
+          placeholder="განათლების აღწერა"
+          onChange={({ target }) =>
+           onChange(target.value, 'description', index)
+          }
           value={eachObj.description}
           variant={getFieldVariant('description', index)}
          />
         </div>
-
        </div>
       );
      })}
     </div>
-    <Button className='add-another-one' title="სხვა სასწავლებლის დამატება" onClick={handleAddAdditional} />
+    <Button
+     className="add-another-one"
+     title="სხვა სასწავლებლის დამატება"
+     onClick={handleAddAdditional}
+    />
     <FormButtons onNext={handleFormSubmit} />
    </Form>
   );

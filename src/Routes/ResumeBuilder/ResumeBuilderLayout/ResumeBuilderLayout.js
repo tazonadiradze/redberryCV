@@ -8,7 +8,23 @@ const formStageNames = {
  3: 'განათლება',
 };
 const ResumeBuilderLayout = ({ children }) => {
- const { stage, personal, experiences, educations } = useResumeBuilder();
+ const { stage, personal, experiences, educations, isResumeCreated } =
+  useResumeBuilder();
+
+ if (isResumeCreated) {
+  return (
+   <div className="resume-created">
+    <Resume
+     personal={personal}
+     experiences={experiences}
+     educations={educations}
+    />
+    <div>
+     <h1>Resume has been created</h1>
+    </div>
+   </div>
+  );
+ }
 
  return (
   <div className="resume-builder">

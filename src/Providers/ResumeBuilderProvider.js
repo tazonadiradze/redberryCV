@@ -1,6 +1,6 @@
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext, useEffect, useReducer } from 'react';
 import axios from '../Utils/Axios';
-
+import { getFromLocalStorage, saveToLocalStorage } from '../Utils/Utils';
 export const ResumeBuilderContext = createContext({});
 
 export const useResumeBuilder = () => useContext(ResumeBuilderContext);
@@ -31,25 +31,44 @@ export const initialExperienceValues = {
 export const initialEducationValues = {
  institute: '',
  degree: '',
+ degree_id: null,
  due_date: '',
  description: '',
 };
 
+const initialStateValues = {
+ isResumeCreated: false,
+ stage: formStages.personal,
+ form: {
+  personal: initialPersonalValues,
+  experiences: [initialExperienceValues],
+  educations: [initialEducationValues],
+ },
+};
 const ResumeBuilderProvider = ({ children }) => {
  const [state, setState] = useReducer(
   (oldState, newState) => ({
    ...oldState,
    ...newState,
   }),
-  {
-   stage: formStages.personal,
-   form: {
-    personal: initialPersonalValues,
-    experiences: [initialExperienceValues],
-    educations: [initialEducationValues],
-   },
-  }
+  initialStateValues
  );
+
+ console.log({ state });
+
+ useEffect(() => {
+  const savedState = getFromLocalStorage();
+  if (savedState) {
+   setState(savedState);
+  }
+ }, []);
+
+ useEffect(() => {
+  if (state !== initialStateValues) {
+   saveToLocalStorage(state);
+  }
+ }, [state]);
+
  const handleSaveFormValues = (key, values) => {
   setState({
    form: {
@@ -59,18 +78,32 @@ const ResumeBuilderProvider = ({ children }) => {
   });
  };
 
+ const handleCreate = async () => {
+  const { experiences, educations, personal } = state.form;
+  const payload = {
+   experiences,
+   educations,
+   ...personal,
+  };
+  const formData = new FormData();
+  Object.keys(personal).forEach((key) => {
+   formData.append(key, payload[key]);
+  });
+  formData.append('experiences', JSON.stringify(experiences));
+  formData.append('educations', JSON.stringify(educations));
+  try {
+   await axios.post('/cvs', payload, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+   });
+   setState({ isResumeCreated: true });
+  } catch (err) {}
+ };
+
  const handleNavigateToNextStage = () => {
   if (state.stage < 3) {
    setState({ stage: ++state.stage });
   } else {
-   const { experiences, educations, personal } = state.form;
-   const payload = {
-    experiences,
-    educations,
-    ...personal,
-   };
-   console.log({payload})
-   axios.post('/cvs', payload);
+   handleCreate();
   }
  };
  const handleNavigateToPreviousStage = () => setState({ stage: --state.stage });
@@ -83,6 +116,7 @@ const ResumeBuilderProvider = ({ children }) => {
     educations: state.form.educations,
     form: state.form,
     stage: state.stage,
+    isResumeCreated: state.isResumeCreated,
     handleNavigateToNextStage,
     handleNavigateToPreviousStage,
     handleSaveFormValues,
