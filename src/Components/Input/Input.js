@@ -1,6 +1,7 @@
 import './Input.css';
-
-const variant = 'default' | 'success' | 'error'
+import successIcon from '../../Assets/Vector.png';
+import errorIcon from '../../Assets/errormessage.png';
+// variant = 'default' | 'success' | 'error'
 
 const Input = ({
  label,
@@ -12,20 +13,27 @@ const Input = ({
  variant = 'default',
  placeholder,
  ...rest
-
 }) => {
  return (
   <div>
    {Boolean(label) && <label className="label">{label}</label>}
-   <input
-    className={`input input-variant-${variant} ${className}`}
-    type={type}
-    value={value}
-    name={name}
-    onChange={onChange}
-    placeholder={placeholder}
-    {...rest}
-   />
+   <div className="input-container">
+    <input
+     className={`input input-variant-${variant} ${className}`}
+     type={type}
+     value={value}
+     name={name}
+     onChange={onChange}
+     placeholder={placeholder}
+     {...rest}
+    />
+    {variant !== 'default' && (
+     <img
+      src={variant === 'success' ? successIcon : errorIcon}
+      className="input-icon"
+     />
+    )}
+   </div>
   </div>
  );
 };

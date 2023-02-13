@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Input from '../../../../Components/Input/Input';
+import Textarea from '../../../../Components/Textarea/Textarea';
 import Form from '../../../../Components/Form/Form';
 import { useResumeBuilder } from '../../../../Providers/ResumeBuilderProvider';
 import { personalValidationSchema } from '../../../../Validation/validationSchemas';
@@ -11,14 +12,15 @@ import './FormPersonal.css';
 const initialTouchedFields = {
  name: false,
  surname: false,
- aboutMe: false,
+ about_me: false,
  email: false,
  phone_number: false,
  image: false,
 };
 
 const FormPersonal = () => {
- const { handleSaveFormValues, handleNavigateToNextStage, personal } = useResumeBuilder();
+ const { handleSaveFormValues, handleNavigateToNextStage, personal } =
+  useResumeBuilder();
  const [touched, setTouched] = useState(initialTouchedFields);
  const [errors, setErrors] = useState({});
 
@@ -71,7 +73,7 @@ const FormPersonal = () => {
     <div className="name-surname">
      <div className=" ">
       <Input
-       placeholder='ანზორ'
+       placeholder="ანზორ"
        className="input-margin"
        label="სახელი"
        type="text"
@@ -83,7 +85,7 @@ const FormPersonal = () => {
      </div>
      <div className="">
       <Input
-       placeholder='მუმლაძე'
+       placeholder="მუმლაძე"
        className="input-margin"
        type="text"
        onChange={({ target }) => onChange('surname', target.value)}
@@ -108,14 +110,13 @@ const FormPersonal = () => {
      </div>
     </div>
     <div className="textarea-margins">
-     <Input
+     <Textarea
       className="textarea-size input-margin"
-      type="text"
       variant={getFieldVariant('aboutMe')}
-      onChange={({ target }) => onChange('aboutMe', target.value)}
+      onChange={({ target }) => onChange('about_me', target.value)}
       label="ჩემ შესახებ (არასავალდებულო)"
-      placeholder='ზოგადი ინფო შენს შესახებ'
-      value={personal.aboutMe}
+      placeholder="ზოგადი ინფო შენს შესახებ"
+      value={personal.about_me}
      />
     </div>
     <div className="gap-between-inputs">
@@ -125,7 +126,7 @@ const FormPersonal = () => {
       variant={getFieldVariant('email')}
       onChange={({ target }) => onChange('email', target.value)}
       label="ელ.ფოსტა"
-      placeholder='anzor666@redberry.ge'
+      placeholder="anzor666@redberry.ge"
       value={personal.email}
      />
      <p className="grey-text">უნდა მთავრდებოდეს @redberry.ge-ით</p>
@@ -139,15 +140,14 @@ const FormPersonal = () => {
       onChange={({ target }) => onChange('phone_number', target.value)}
       label="მობილურის ნომერი"
       value={personal.phone_number}
-      placeholder='+995551123456'
+      placeholder="+995551123456"
      />
      <p className="grey-text">
       უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს
      </p>
     </div>
    </Form>
-   <div className='FormButtons'>
-
+   <div className="FormButtons">
     <FormButtons onNext={handleSubmit} />
    </div>
   </div>

@@ -1,31 +1,23 @@
 .input {
  width: 371px;
- height: 56px;
- display: flex;
- justify-content: center;
- align-items: center;
  margin: 0;
+ padding: 13px 16px;
+ font-size: 16px;
+ line-height: 21px;
+ border-radius: 4px;
 }
 
 .input-variant-success {
  position: relative;
- padding-left: 30px;
- border: 1px solid #98E37E;
- background-image: url('../../Assets/Vector.png');
- background-repeat: no-repeat;
-
- background-position: right;
+ border: 1px solid #98e37e;
 }
 
 .input-variant-error {
- border: 1px solid #EF5050;
- background-image: url('../../Assets/errormessage.png');
- background-repeat: no-repeat;
- background-position: right;
+ border: 1px solid #ef5050;
 }
 
 .input-variant-default {
- border: 1px solid #BCBCBC;
+ border: 1px solid #bcbcbc;
 }
 
 .label {
@@ -33,4 +25,16 @@
  justify-content: flex-start;
  align-items: center;
  margin-bottom: 8px;
+}
+
+.input-container {
+ position: relative;
+ display: flex;
+ align-items: center;
+}
+
+.input-icon {
+ position: absolute;
+ right: 15px;
+ z-index: 1;
 }

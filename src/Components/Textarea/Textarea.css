@@ -1,0 +1,19 @@
+.textarea {
+ padding: 13px 16px;
+ box-sizing: border-box;
+ height: 103px;
+ border-radius: 4px;
+}
+
+.textarea-variant-success {
+ position: relative;
+ border: 1px solid #98e37e;
+}
+
+.textarea-variant-error {
+ border: 1px solid #ef5050;
+}
+
+.textarea-variant-default {
+ border: 1px solid #bcbcbc;
+}

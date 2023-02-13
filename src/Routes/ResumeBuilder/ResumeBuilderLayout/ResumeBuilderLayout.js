@@ -1,7 +1,7 @@
 import { useResumeBuilder } from '../../../Providers/ResumeBuilderProvider';
 import Resume from '../../../Components/Resume/Resume';
+import { useState } from 'react';
 import './ResumeBuilder.css';
-import { useState, useEffect } from 'react';
 
 const formStageNames = {
  1: 'პირადი ინფო',
@@ -9,57 +9,43 @@ const formStageNames = {
  3: 'განათლება',
 };
 const ResumeBuilderLayout = ({ children }) => {
- const { stage, personal, experiences, educations, isResumeCreated } = useResumeBuilder();
- const [showDiv, setShowDiv] = useState(true)
- // onbtn click clear localstorage
- const [existingData, setExistingData] = useState(null);
- useEffect(() => {
-  const existingDataFromLocalStorage = localStorage.getItem("state");
-  setExistingData(existingDataFromLocalStorage);
- }, []);
+ const { stage, personal, experiences, educations, isResumeCreated } =
+  useResumeBuilder();
+ const [showSuccess, setShowSuccess] = useState(true);
 
  const handleButtonClick = () => {
   localStorage.clear();
-  setExistingData(null);
   window.location.reload();
   window.location.replace('/');
-
  };
-
- // onbtn click clear localstorage
 
  if (isResumeCreated) {
   return (
    <div className="resume-created">
-    <div className='backdiv'>
-     <div onClick={handleButtonClick} className='back'>&lt;</div>
+    <div className="backdiv">
+     <div onClick={handleButtonClick} className="back">
+      &lt;
+     </div>
     </div>
     <Resume
      personal={personal}
      experiences={experiences}
      educations={educations}
-
     />
 
-
-    {
-     showDiv && <div>
-      <div className='resume-sent'>
-       <div className="remove-button" onClick={() => setShowDiv(false)}>X</div>
+    {showSuccess && (
+     <div>
+      <div className="resume-sent">
+       <div className="remove-button" onClick={() => setShowSuccess(false)}>
+        X
+       </div>
        <h2>რეზიუმე წარმატებით გაიგზავნა</h2>
       </div>
      </div>
-    }
-
-
-
+    )}
    </div>
-
   );
-
  }
-
-
 
  return (
   <div className="resume-builder">
@@ -77,7 +63,6 @@ const ResumeBuilderLayout = ({ children }) => {
      experiences={experiences}
      educations={educations}
     />
-
    </div>
   </div>
  );
